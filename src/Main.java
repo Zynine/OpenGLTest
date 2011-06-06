@@ -44,7 +44,7 @@ public class Main {
 			renderGL();
  
 			Display.update();
-			Display.sync(60); // cap fps to 60fps
+			Display.sync(120); // cap fps to 60fps
 		}
  
 		Display.destroy();
@@ -190,33 +190,22 @@ public class Main {
  
 		// R,G,B,A Set The Color To Blue One Time Only
 		GL11.glColor3f(0.5f, 0.5f, 1.0f);
- 
+		DisplayMode temp = Display.getDisplayMode();
 		// draw quad
-		GL11.glPushMatrix();
-			GL11.glTranslatef(x, y, 0);
-			GL11.glRotatef(rotation, 0f, 0f, 1f);
-			GL11.glTranslatef(-x, -y, 0);
+		for(int i = 0; i <10; i++) {
+			for(int j =0; j <10; j++) {
+		// R,G,B,A Set The Color To Blue One Time Only
+				GL11.glPushMatrix();
+		GL11.glColor3f(i/3, j/2, i/3);
 			GL11.glBegin(GL11.GL_QUADS);
-				GL11.glVertex2f(x - 50, y - 50);
-				GL11.glVertex2f(x + 50, y - 50);
-				GL11.glVertex2f(x + 50, y + 50);
-				GL11.glVertex2f(x - 50, y + 50);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 0.5f, 0.5f);
-			GL11.glBegin(GL11.GL_QUADS);
-				GL11.glVertex2f(x + 100, y + 100);
-				GL11.glVertex2f(x + 200, y + 100);
-				GL11.glVertex2f(x + 200, y + 200);
-				GL11.glVertex2f(x + 100, y + 200);
-			GL11.glEnd();
-			GL11.glColor3f(0.5f, 1.0f, 0.5f);
-			GL11.glBegin(GL11.GL_QUADS);
-				GL11.glVertex2f(x - 200, y - 200);
-				GL11.glVertex2f(x - 100, y - 200);
-				GL11.glVertex2f(x - 100, y - 100);
-				GL11.glVertex2f(x - 200, y - 100);
+				GL11.glVertex2f((temp.getWidth()/10)*i, (temp.getHeight()/10)*j);
+				GL11.glVertex2f((temp.getWidth()/10)*i, (temp.getHeight()/10)*j+100);
+				GL11.glVertex2f((temp.getWidth()/10)*i+100, (temp.getHeight()/10)*j+100);
+				GL11.glVertex2f((temp.getWidth()/10)*i+100, (temp.getHeight()/10)*j);
 			GL11.glEnd();
 		GL11.glPopMatrix();
+		}
+	}
 	}
  
 	public static void main(String[] argv) {
